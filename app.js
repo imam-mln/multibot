@@ -33,19 +33,19 @@ client.on("message", async (message) => {
   
   // MENU LIST
   if (message.body.startsWith(".menu")) {
-    let reply_msg = `
-    Menu Fitur-Fitur yang tersedia :
-    🟢 URL Shortener (*${menu.urlshort[0]}*)
-    ${menu.urlshort[1]}
+    let reply_msg =
+`Menu Fitur-Fitur yang tersedia :
+🟢 URL Shortener (*${menu.urlshort[0]}*)
+${menu.urlshort[1]}
 
-    🟢 Instagram Reel Downloader (*${menu.reelsave[0]}*)
-    ${menu.reelsave[1]}
-    
-    🟢 Tiktok Video Downloader (*${menu.tiktoksave[0]}*)
-    ${menu.tiktoksave[1]}
-    
-    🟢 Whatsaap Stiker Maker (*${menu.sticker[0]}*)
-    `
+🟢 Instagram Reel Downloader (*${menu.reelsave[0]}*)
+${menu.reelsave[1]}
+
+🟢 Tiktok Video Downloader (*${menu.tiktoksave[0]}*)
+${menu.tiktoksave[1]}
+
+🟢 Whatsaap Stiker Maker (*${menu.sticker[0]}*)`
+
     client.sendMessage(message.from, reply_msg)
   }
   // TIKTOK DOWNLOADER MP4 & MP3
@@ -66,14 +66,27 @@ client.on("message", async (message) => {
   // INSTAGRAM DOWNLOADER
   else if (message.body.startsWith(".reelsave")) {
     let reply_msg, msg = message.body.split(" ")
+    // CORRECT MESSAGE
     if (msg.length == 2) {
       const result = await InstaDown(msg[1])
-      reply_msg = `Instagram Reel Downloader\nMP4 ▶ : ${result.SL_igReel}\nMP3 🎵 : ${result.SL_igAud}`
-      
-      // reply_msg = new Buttons('Body text/ MessageMedia instance', [{id:'customId',body:'button1'},{body:'button2'},{body:'button3'},{body:'button4'}], 'Title here, doesn\'t work with media', 'Footer here')
-    } else {
+      // Status Success
+      if (result.status === "success") {
+        reply_msg = `Instagram Reel Downloader\nMP4 ▶ : ${result.SL_igReel}\nMP3 🎵 : ${result.SL_igAud}`        
+      } 
+      // Status Failed
+      else if (result.status === "failed") {
+        reply_msg = result.pesan
+      }
+      // Status Error
+      else if (result.status === "error") {
+        reply_msg = result.pesan
+      }
+    }
+    // WRONG FORMAT MESSAGE
+    else {
       reply_msg = "_contoh:_ _*.reelsave https://tiktokLink.com*_"
     }
+    // SEND MESSAGE
     client.sendMessage(message.from, reply_msg)
   }
   // URL SHORTENER
