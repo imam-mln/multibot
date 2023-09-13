@@ -20,7 +20,12 @@ client.on("ready", () => {
   console.log("Client is ready!")
 })
 
-feat_menu = []
+menu = {
+  tiktoksave : [".tiktoksave", "_contoh:_ _*.tiktoksave https://tiktokLink.com*_"],
+  reelsave : [".reelsave", "_contoh:_ _*.reelsave https://tiktokLink.com*_"],
+  urlshort : [".urlshort", "_contoh:_ _*.urlshort https://yourlink.com LinkSaya*_"],
+  sticker : [".sticker"]
+}
 
 client.on("message", async (message) => {
 
@@ -28,7 +33,20 @@ client.on("message", async (message) => {
   
   // MENU LIST
   if (message.body.startsWith(".menu")) {
-    client.sendMessage(message.from, "Menu list :")
+    let reply_msg = `
+    Menu Fitur-Fitur yang tersedia :
+    🟢 URL Shortener (*${menu.urlshort[0]}*)
+    ${menu.urlshort[1]}
+
+    🟢 Instagram Reel Downloader (*${menu.reelsave[0]}*)
+    ${menu.reelsave[1]}
+    
+    🟢 Tiktok Video Downloader (*${menu.tiktoksave[0]}*)
+    ${menu.tiktoksave[1]}
+    
+    🟢 Whatsaap Stiker Maker (*${menu.sticker[0]}*)
+    `
+    client.sendMessage(message.from, reply_msg)
   }
   // TIKTOK DOWNLOADER MP4 & MP3
   else if (message.body.startsWith(".tiktoksave")) {
