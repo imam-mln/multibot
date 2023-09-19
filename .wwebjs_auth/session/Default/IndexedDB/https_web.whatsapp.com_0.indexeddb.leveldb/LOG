@@ -1,0 +1,9 @@
+2023/09/19-13:57:43.037 1680 Reusing MANIFEST C:\My Foo\NODEJS PROJECT\multibot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/09/19-13:57:43.037 1680 Recovering log #24
+2023/09/19-13:57:43.149 1680 Reusing old log C:\My Foo\NODEJS PROJECT\multibot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000024.log 
+2023/09/19-13:58:56.025 af8 Compacting 1@1 + 1@2 files
+2023/09/19-13:58:56.051 af8 Generated table #28@1: 12184 keys, 488907 bytes
+2023/09/19-13:58:56.051 af8 Compacted 1@1 + 1@2 files => 488907 bytes
+2023/09/19-13:58:56.052 af8 compacted to: files[ 0 0 1 0 0 0 0 ]
+2023/09/19-13:58:56.052 af8 Delete type=2 #21
+2023/09/19-13:58:56.052 af8 Delete type=2 #26

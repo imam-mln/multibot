@@ -25,14 +25,14 @@ async function InstaDown(url) {
         } else if (resReel.data.success === false && resAud.data.success === false) {
             const result = {
                 status : "failed",
-                pesan : "*Mohon Masukan Link Instagram Reel dengan Benar!*"
+                message : "*Mohon Masukan Link Instagram Reel dengan Benar!*"
             }
             // console.log(result);
             return result
         } else {
             const result = {
                 status : "error",
-                pesan : "*.reelsave error!*"
+                message : "*.reelsave error!*"
             }
             // console.log(result);
             return result
@@ -47,7 +47,7 @@ async function InstaDown(url) {
 // const url = "https://vt.tiktok.com/ZSLGRCTy5/"
 // const url = "hasbihbiu"
 // DEBUG FUNCTION
-InstaDown(url)
+// InstaDown(url)
 
 // DEBUG RETURN VALUE
 // (async () => { console.log(await InstaDown(url))})()

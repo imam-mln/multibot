@@ -1,6 +1,7 @@
 const {Client, LocalAuth, MessageMedia, Buttons} = require("whatsapp-web.js")
 const qrcode = require("qrcode-terminal")
-const { CSU } = require('./CustomShortURL') 
+// const { CSU } = require('./CustomShortURL')
+const { Tinyurl } = require('./tinyurl') 
 const { ttdown } = require("./ttdown")
 const { InstaDown } = require('./InstaDown')
 
@@ -35,16 +36,16 @@ client.on("message", async (message) => {
   if (message.body.startsWith(".menu")) {
     let reply_msg =
 `Menu Fitur-Fitur yang tersedia :
-🟢 URL Shortener (*${menu.urlshort[0]}*)
+🟢 *${menu.urlshort[0]}* (URL Shortener)
 ${menu.urlshort[1]}
 
-🟢 Instagram Reel Downloader (*${menu.reelsave[0]}*)
+🟢 *${menu.reelsave[0]}* (Instagram Reel Downloader)
 ${menu.reelsave[1]}
 
-🟢 Tiktok Video Downloader (*${menu.tiktoksave[0]}*)
+🟢 *${menu.tiktoksave[0]}* (Tiktok Video Downloader)
 ${menu.tiktoksave[1]}
 
-🟢 Whatsaap Stiker Maker (*${menu.sticker[0]}*)`
+🟢 *${menu.sticker[0]}* (Whatsaap Stiker Maker)`
 
     client.sendMessage(message.from, reply_msg)
   }
@@ -55,7 +56,6 @@ ${menu.tiktoksave[1]}
       const result = await ttdown(msg[1])
       reply_msg = `Tiktok Video Downloader\nMP4 ▶ : ${result.SL_ttVid}\nMP3 🎵 : ${result.SL_ttAud}`
       
-      // reply_msg = new Buttons('Body text/ MessageMedia instance', [{id:'customId',body:'button1'},{body:'button2'},{body:'button3'},{body:'button4'}], 'Title here, doesn\'t work with media', 'Footer here')
     } else {
       reply_msg = "_contoh:_ _*.tiktoksave https://tiktokLink.com*_"
     }
@@ -75,11 +75,11 @@ ${menu.tiktoksave[1]}
       } 
       // Status Failed
       else if (result.status === "failed") {
-        reply_msg = result.pesan
+        reply_msg = result.message
       }
       // Status Error
       else if (result.status === "error") {
-        reply_msg = result.pesan
+        reply_msg = result.message
       }
     }
     // WRONG FORMAT MESSAGE
@@ -93,9 +93,19 @@ ${menu.tiktoksave[1]}
   else if (message.body.startsWith(".urlshort")) {
     let reply_msg, msg = message.body.split(" ")
     if (msg.length == 3) {
-      reply_msg = `Link Anda : ${await CSU(msg[1], msg[2])}`
+      const link = await Tinyurl(msg[1], msg[2])
+      if (link.status === "success") {
+        reply_msg = `Link Anda : ${link.tiny_url}`
+      } else {
+        reply_msg = `Link Anda : ${link.message}`
+      }
     } else if (msg.length == 2) {
-      reply_msg = `Link Anda : ${await CSU(msg[1])}`
+      const link = await Tinyurl(msg[1])
+      if (link.status === "success") {
+        reply_msg = `Link Anda : ${link.tiny_url}`
+      } else {
+        reply_msg = `Link Anda : ${link.message}`
+      }
     } else {
       reply_msg = "_contoh:_ _*.urlshort https://yourlink.com LinkSaya*_"
     }
