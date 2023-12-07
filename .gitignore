@@ -1,7 +1,7 @@
 node_modules
-.wwebjs_auth
-.wwebjs_cache
-package.json
-package-lock.json
-index.html
-test.js
+# .wwebjs_auth/
+# .wwebjs_cache/
+# package.json
+# package-lock.json
+# index.html
+# test.js
